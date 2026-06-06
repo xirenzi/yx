@@ -12,8 +12,10 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask import Flask, request, jsonify, render_template_string
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # 允许跨域请求
 CONFIG_FILE = "config.json"
 
 # ---------- 配置读写 ----------
@@ -229,7 +231,11 @@ def recruit():
     if not cfg.get("recipients"):
         return jsonify({"error": "未配置收件邮箱"}), 500
 
-    data = request.get_json(force=True)
+    # 支持 JSON 和 FormData 两种格式
+    if request.is_json:
+        data = request.get_json()
+    else:
+        data = request.form.to_dict()
     nickname = data.get("nickname", "")
     contact  = data.get("contact", "")
     maps     = data.get("maps", "")
