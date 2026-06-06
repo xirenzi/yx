@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+
+backend/config.json
+backend/__pycache__/
+*.pyc
+.env
+
+.streamlit/secrets.toml
+.streamlit/
+__pycache__/
+*.pyc
+.env
+backend/config.json
+
