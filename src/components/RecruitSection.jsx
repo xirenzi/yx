@@ -17,7 +17,7 @@ export default function RecruitSection({ onContact }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/recruit",
+        "http://yxapi.hljcxcx.top/api/recruit",
         {
           method: "POST",
           body: formData,
